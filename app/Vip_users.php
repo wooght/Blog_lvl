@@ -3,16 +3,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+//启用auth功能依赖上面两个
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Vip_users extends Authenticatable
 {
-    use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    use Notifiable;//启用auth功能依赖
+    //自动填充
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -22,6 +19,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    //黑名单
     protected $hidden = [
         'password', 'remember_token',
     ];

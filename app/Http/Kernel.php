@@ -50,6 +50,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //认证中间件定义
     protected $routeMiddleware = [
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
@@ -57,5 +58,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        //注册中间件
+        'auth.admin' => \App\Http\Middleware\AdminAuthMiddleware::class,
     ];
 }

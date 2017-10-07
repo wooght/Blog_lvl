@@ -34,11 +34,16 @@ return [
     | Supported: "session", "token"
     |
     */
-
+    //用户类型
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        //添加后台用户类型
+        'admin'=>[
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
 
         'api' => [
@@ -68,6 +73,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        //添加后台用户验证及数据模型
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
         ],
 
         // 'users' => [

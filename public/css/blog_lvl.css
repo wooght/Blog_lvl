@@ -1,0 +1,107 @@
+html, body {
+    background-color: #eee;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+  background-color: #fff;
+  width: 80%;
+  margin: 20px auto;
+  padding:10px 10px;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+.top{  background-color: #ffffff;  height:50px;  line-height: 50px;  font-size: 22px;  border-bottom: 1px solid #cccccc;  margin: 0px auto;  padding: 0px 10px;}
+.c_red{  color:red;}
+
+/*浮动*/
+.f_right{  float: right;  margin:0px 5px;  font-size: 18px;}
+.f_left{  float:left;}
+
+.footer{
+  border-top: 1px solid #cccccc; margin-top: 10px; padding-top:5px; text-align:center;
+}
+.f_right > a{
+  text-decoration:none;
+  font-size: 18px;
+  color:#333;
+}
+.index > a{
+  text-decoration: none;
+  color:#333;
+}
+
+/*发布表单*/
+.user_form{margin:auto; width:80%; margin-top: 20px; font-size: 12px;}
+.user_form .new_tie{font-size:66px; color:#ccc; margin-bottom: 20px;}
+.user_form span{display: block; float: left;}
+.user_form .title{width:80%; height:30px; border:1px solid #393; font-size:14px;}
+.user_form .content{width:80%;height:50px; border:1px solid #393;}
+.user_form .submit{width:100px; height:30px; color:#393;}
+
+/*错误提示*/
+.blog_errors{color:red; font-size: 14px; margin:10px; background-color: #f99; color:#fff; line-height: 30px; padding:5px;}
+
+/*文章显示*/
+.index_title{font-size:36px; width:90%; line-height: 40px;color:#ccc; margin:auto; margin-bottom: 15px; overflow: hidden;}
+.title_left{width:80%; border-right: 1px solid #ccc; height:40px;}
+.title_button{width:19%; text-align:right; height:40px;}
+.fb_button{font-size:24px; color:red; border:1px solid red; height: 36px;width: 200px;}
+
+.article_list{border-bottom:solid 1px #ddd; margin:5px auto; width:90%; line-height: 30px;}
+
+/*回复表单*/
+.rply_form{width:90%; margin: auto; overflow: hidden;}
+.rply_form .comment{width:99%; border:1px solid #393; height:80px;}
+.rply_form input{width:100px; height:40px; font-size:18px; background-color: #f93;}
+
+/*评论内容*/
+.comts_list{width:90%; background-color: #eee; margin: 10px auto; padding:10px;}
+.comts_list .comts_user{color:#339; margin: 10px 0px 2px 2px;}
+.comts_list .comts_body{border:1px solid #ccd; padding:10px;}
+
+/*
+后台CSS
+*/
+.ad_daohang{font-size: 16px; line-height: 30px; border-bottom: 1px solid #393; overflow: hidden;}
+.ad_daohang span{width:200px; border: 1px solid #511;border-bottom: 0px; text-align:center; display: block; float: left; margin-left: 10px;}
+.ad_daohang a{display: block;}
+.ad_daohang a:hover{text-decoration:none;}
+.ad_daohang .now{background-color: #FCC;}
+.edi_button{display: block; width: 50px; text-align: center;float: left; height: 20px; line-height: 20px; margin-left: 5px;background-color: #FEE;}
