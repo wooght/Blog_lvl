@@ -177,6 +177,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         *支持UEidtor by wooght
+         */
+        Stevenyangecho\UEditor\UEditorServiceProvider::class
+
     ],
 
     /*
@@ -225,7 +230,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        /*
+         *UEditor by wooght
+         */
+        'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class,
     ],
 
 ];

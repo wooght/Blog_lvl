@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Articles;
 use Illuminate\Support\Facades\Input;
 use Redirect;
+use App\Wooght;
 /**
 后台默认控制器
 文章操作相关功能
@@ -37,10 +38,10 @@ class HomeController extends Controller
   /**
   删除文章
   */
-  public function destore($id){
+  public function destroy($id){
     $art=Articles::find($id);
     if($art->delete()){
-      return Redirect::to('/');
+      return Redirect::to('admin/home');
     }
     return Redirect::to('/')->withError('删除失败!');
   }

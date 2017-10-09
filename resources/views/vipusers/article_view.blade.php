@@ -7,7 +7,7 @@
     <span>作者:{{$article->name}},阅读:{{$article->reads}},评论:{{$article->comments}},发布:{{$article->created_at}}</span>
   </div>
   <div class="article_list">
-    {{$article->article_body}}
+    {!!$article->article_body!!}
   </div>
   <!--发布回复表单-->
   <div name='rply_form' class="rply_form">

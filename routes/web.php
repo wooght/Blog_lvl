@@ -12,7 +12,9 @@
 */
 //博客系统 路由
 Route::get('/', 'BlogHomeController@index');//首页
+Route::get('page/{page}','BlogHomeController@index');
 Route::get('article/id/{id}','BlogHomeController@article_view');//文章详情
+Route::get('is_email','BlogHomeController@is_email');//判断用户名和邮箱
 Route::group(['prefix'=>'vipusers','namespace'=>'vipusers','middleware'=>'auth'],function(){
   //从此路由进来的请求,都会通过middleware的判断
   Route::resource('fb','VipHomeController');//发布
@@ -31,6 +33,5 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router){
   /*管理内容*/
   Route::resource('article','HomeController');//文章资源管理
   $router->put('articleup','ArticlesController@articleup');
-  $router->delete('articledel','ArticlesController@destore');
 });
 Auth::routes();

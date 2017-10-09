@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link href="{{asset('css/blog_lvl.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('css/wooght.css')}}" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>

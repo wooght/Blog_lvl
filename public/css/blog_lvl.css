@@ -72,7 +72,7 @@ html, body {
 .user_form .new_tie{font-size:66px; color:#ccc; margin-bottom: 20px;}
 .user_form span{display: block; float: left;}
 .user_form .title{width:80%; height:30px; border:1px solid #393; font-size:14px;}
-.user_form .content{width:80%;height:50px; border:1px solid #393;}
+.user_form .content{width:80%;height:150px; border:1px solid #393;}
 .user_form .submit{width:100px; height:30px; color:#393;}
 
 /*错误提示*/

@@ -12,6 +12,9 @@ use App\Articles;
 
 use Redirect,Auth;
 
+//引入文件
+use App\Wooght\wfile;
+
 //vip相关操作
 //发布帖子
 class VipHomeController extends Controller
@@ -24,13 +27,20 @@ class VipHomeController extends Controller
   //添加帖子 一个控制器操作一个表
   public function store(Request $request)
   {
+      $img='';
+      if($request->file('img')){
+        $file=new wfile($_FILES['img']);//$request->file('img') 返回的是Laravel对象,不实用
+        $file->file_save('uploads/image/');
+        $img=$file->f_name;
+      }
       $this->validate($request, [
           'title' => 'required|max:25',
           'body' => 'required|min:10',],['title.required'=>'标题必须填写','title.max'=>'标题必须在25字以内','body.min'=>'内容必须大于10字']);
       $at = new Articles;
       $at->article_title = Input::get('title');
       $at->article_body = Input::get('body');
-      $at->article_contents=Input::get('body');
+      $at->article_contents=wsubstr(Input::get('body'),'100','zh');
+      $at->img=$img;
       $at->user_id = Auth::user()->id;//获取当前用户ID
 
       if ($at->save()) {

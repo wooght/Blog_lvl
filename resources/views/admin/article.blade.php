@@ -20,7 +20,7 @@
       </div>
       @endif
       @if(session('ok'))
-      success(session('ok'));
+      {!!alert(session('ok'))!!}
       @endif
     <form method="post" action="{{URL('admin/article/'.$arts->id)}}">
       <div><span>标题:</span> <input value="{{$arts->article_title}}" class="title" type="text" name="title"></div>
