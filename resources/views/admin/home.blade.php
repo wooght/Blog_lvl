@@ -1,27 +1,46 @@
-@extends('layout.app')
-
-@section('content')
+@extends('layouts.adminlte')
 <!--后台首页,默认文章列表-->
-<div class="content">
-  <div class="ad_daohang">
-    <span class="now"><a href="#">文章列表</a></span>
-    <span><a href="#">用户列表</a></span>
-    <span><a href="#">全部评论</a></span>
-  </div>
-  @foreach($list as $one)
-  <div class="article_list">
-    [{{$one->name}}]发布:<a href='{{URL('article/id/'.$one->id)}}'>{{$one->article_title}}</a>
-    <span class="f_right">
-      <a class="edi_button" href='{{URL('admin/article/'.$one->id.'/edit')}}'>编辑</a>
-      <form action="{{URL('admin/article/'.$one->id)}}" id='delete_form{{$one->id}}' style="display:inline;" method="post">
+@section('header')
+    主题帖子列表
+    <small>管理主题帖子</small>
+@endsection
+@section('bread')
+    <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+    <li class="active">主题列表</li>
+@endsection
+@section('content')
+<section class="content container-fluid">
+  <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                  <tr>
+                    <th>ID</th>
+                    <th>发布者</th>
+                    <th>标题</th>
+                    <th>阅读数</th>
+                    <th>评论数</th>
+                    <th>时间</th>
+                    <th>编辑</th>
+                  </tr>
+                  @foreach($list as $one)
+                  <tr>
+                    <td>{{$one->id}}</td>
+                    <td>{{$one->name}}</td>
+                    <td>{{$one->article_title}}</td>
+                    <td><span class="badge bg-red">{{$one->reads}}</span></td>
+                    <td><span class="badge bg-blue">{{$one->comments}}</span></td>
+                    <td>{{$one->created_at}}</td>
+                    <td><span class="label label-success"><a style="color:#fff;" href='{{URL('admin/article/'.$one->id.'/edit')}}'>Edit</a></span></td>
+                    <td><span class="label label-warning"><a style="color:#fff;" href="#" onclick="document.getElementById('del_fm{{$one->id}}').submit();">Dll</a></span></td>
+                  </tr>
+                  @endforeach
+                </table>
+              </div>
+              {!!$fy!!}
+
+      <form action="{{URL('admin/article/'.$one->id)}}" id='del_fm{{$one->id}}' style="display:none;" method="post">
         <input name='_method' type="hidden" value='DELETE'><!--DELETE大写-->
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <!--不能input传递其他参数-->
-        <input style="height:20px; border:1px solid red; width:30px; line-height:20px; float:left; font-size:12px;" type="submit" value="del">
       </form>
-    </span>
-    <span class="f_right">阅读:{{$one->reads}},评论:{{$one->comments}},{{$one->created_at}}</span>
-  </div>
-  @endforeach
-</div>
+</section>
 @endsection

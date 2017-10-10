@@ -25,7 +25,7 @@ return [
     | services your application utilizes. Set this in your ".env" file.
     |
     */
-
+    //生产环境 production
     'env' => env('APP_ENV', 'production'),
 
     /*
@@ -38,6 +38,7 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
+    //调式模式
 
     'debug' => env('APP_DEBUG', false),
 
@@ -77,6 +78,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
+    //本地语言
 
     'locale' => 'en',
 
@@ -106,7 +108,7 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'cipher' => 'AES-256-CBC',
+    'cipher' => 'AES-256-CBC',//加密密码
 
     /*
     |--------------------------------------------------------------------------
@@ -121,7 +123,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'single'),//记录日志  单一模式
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -135,11 +137,13 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+    //需要自动加载的系统 提供者
 
     'providers' => [
 
         /*
          * Laravel Framework Service Providers...
+         *框架支撑
          */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -170,6 +174,7 @@ return [
 
         /*
          * Application Service Providers...
+         * 框架服务支撑
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -195,6 +200,7 @@ return [
     |
     */
 
+    //aliases别名设置 方便应用
     'aliases' => [
 
         'App' => Illuminate\Support\Facades\App::class,

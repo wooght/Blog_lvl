@@ -16,3 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+//访问api的方法  api/is_email
+Route::get('/is_email','BlogHomeController@is_email');

@@ -1,6 +1,7 @@
 /*
 翻页 by wooght 2013
 */
+.fanye{margin:10px 5px; text-align: right;}
 .fanye a{height:25px;line-height:25px;padding:0 10px;border:1px solid #e6e6e6;display:inline-block;clear:both;overflow:hidden;color:#000; margin:0px 5px;}
 .fanye a:hover,.fanye .c{background:#5ea600;color:#fff; text-decoration:none;}
-.fanye .kuan{padding:0 10px;border:1px solid #e6e6e6; line-height:25px; height:25px; display:block; width:60px; float:left; text-align:center;}
+.fanye .kuan{padding:0 10px;border:1px solid #e6e6e6; display:block; float: right;line-height:25px; height:25px; width:60px; text-align:center;}

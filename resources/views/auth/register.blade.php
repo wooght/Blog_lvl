@@ -5,12 +5,11 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading">注册</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
-
+                      {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">用户名</label>
 
@@ -76,7 +75,7 @@
 <script type="text/javascript">
   function is_email(str){
     if(str.length>0)
-    _ajax.get('email='+str,'{{URL('is_email')}}',function (date){
+    _ajax.get('email='+str,'{{URL('api/is_email')}}',function (date){
       if(date=='exists'){
         __('email_exists').innerHTML='邮箱已经存在';
       }else{

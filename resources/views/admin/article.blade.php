@@ -1,16 +1,15 @@
-@extends('layout.app')
+@extends('layouts.adminlte')
 
+@section('header')
+    编辑主题
+    <small>编辑主题帖子</small>
+@endsection
+@section('bread')
+    <li><a href="{{URL('admin')}}"><i class="fa fa-dashboard"></i> 主题管理</a></li>
+    <li class="active">编辑帖子</li>
+@endsection
 @section('content')
-<!--后台首页,默认文章列表-->
-<div class="content">
-  <div class="ad_daohang">
-    <span class="now"><a href="#">文章列表</a></span>
-    <span><a href="#">用户列表</a></span>
-    <span><a href="#">全部评论</a></span>
-  </div>
-  <div name='user_form' class="user_form">
-    <div class="new_tie">编辑帖子</div>
-
+<section class="content container-fluid">
       @if(count($errors)>0)
       <div class="blog_errors">
       !!!!内容填写有误,修改失败:
@@ -23,13 +22,36 @@
       {!!alert(session('ok'))!!}
       @endif
     <form method="post" action="{{URL('admin/article/'.$arts->id)}}">
-      <div><span>标题:</span> <input value="{{$arts->article_title}}" class="title" type="text" name="title"></div>
-      <div><span>正文:</span> <textarea class='content' required='required' name="body">{{$arts->article_body}}</textarea></div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">主题标题</label>
+        <input type="" name="title" value="{{$arts->article_title}}" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+      </div>
+      <div id="ueditor" name='body' class="edui-default">
+        <label>正文:</label>
+        @include('UEditor::head')
+      </div>
+
       <input type="hidden" name="id" value="{{$arts->id}}" />
       <input type="hidden" name="_token" value="{{ csrf_token() }}"><!--Laravel通过post提交的表单必须有csrf-->
       <input name="_method" type="hidden" value="PUT">
-      <div><input type="submit" class="submit" value="提交"></div>
+      <div class="box-footer">
+                <button type="submit" class="btn btn-primary">提交</button>
+      </div>
     </form>
   </div>
-</div>
+</section>
+<script>
+  var ue=UE.getEditor("ueditor",{
+    //toolbars:[
+    //  ['Undo','Bold','Image']
+    //],
+    initialFrameHeight:200,
+    autoClearinitialContent:true
+  });
+  ue.ready(function(){
+       //因为Laravel有防csrf防伪造攻击的处理所以加上此行
+       ue.execCommand('serverparam','_token','{{ csrf_token() }}');
+       ue.setContent('{!!$arts->article_body!!}');
+  });
+</script>
 @endsection

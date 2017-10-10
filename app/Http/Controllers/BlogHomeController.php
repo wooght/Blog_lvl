@@ -26,6 +26,10 @@ class BlogHomeController extends Controller
     $fy=$fyobj->show();
     return view('welcome',compact('fy','atnum'))->withList($at_list);
   }
+  //测试后台
+  public function adm_index(){
+    return view('adminlte');
+  }
   //查看文章详细信息
   public function article_view($id){
     $at=Articles::find($id);

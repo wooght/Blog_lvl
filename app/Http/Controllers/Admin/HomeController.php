@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Articles;
 use Illuminate\Support\Facades\Input;
 use Redirect;
-use App\Wooght;
+use App\Wooght\wfanye;
 /**
 后台默认控制器
 文章操作相关功能
@@ -26,14 +26,17 @@ class HomeController extends Controller
   /**
   默认方法
    */
-  public function index()
+  public function index($page=1)
   {
     //文章列表
     $at=new Articles;
+    $at_num=Articles::all()->count();//总数
+    $fy_boj=new wfanye($page,$at_num,'/admin',10,10);
+    $fy=$fy_boj->show();
     $list=$at->join('users',function($users){
       $users->on('articles.user_id','=','users.id');
-    })->select('articles.id as id','articles.article_title','articles.created_at','users.name','reads','comments')->get();
-    return view('admin/home')->withList($list);
+    })->select('articles.id as id','articles.article_title','articles.created_at','users.name','reads','comments')->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
+    return view('admin/home',compact('fy'))->withList($list);
   }
   /**
   删除文章
