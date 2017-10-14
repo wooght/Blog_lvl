@@ -1,5 +1,9 @@
 <?php
 
+// @author Wooght
+// @date 2017-10-10
+// @description admin index controller
+
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -8,14 +12,15 @@ use App\Http\Controllers\Controller;
 use App\Articles;
 use Illuminate\Support\Facades\Input;
 use Redirect;
+use App\User;
 use App\Wooght\wfanye;
-/**
+/*
 后台默认控制器
 文章操作相关功能
 */
 class HomeController extends Controller
 {
-  /**
+  /*
   构造指定中间件 middleware auth
   */
   public function __construct()
@@ -23,7 +28,7 @@ class HomeController extends Controller
       $this->middleware('auth.admin:admin');
   }
 
-  /**
+  /*
   默认方法
    */
   public function index($page=1)
@@ -38,7 +43,7 @@ class HomeController extends Controller
     })->select('articles.id as id','articles.article_title','articles.created_at','users.name','reads','comments')->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
     return view('admin/home',compact('fy'))->withList($list);
   }
-  /**
+  /*
   删除文章
   */
   public function destroy($id){
@@ -48,7 +53,7 @@ class HomeController extends Controller
     }
     return Redirect::to('/')->withError('删除失败!');
   }
-  /**
+  /*
   执行修改
   */
   public function update(Request $request,$id){
@@ -68,15 +73,16 @@ class HomeController extends Controller
       withOk('')  将内容存放在session中供重定向后使用.
       */
     }
-    return Redirect::to('/');
+    return Redirect::to('/')->withOk('保存失败');
   }
-  /**
+  /*
   编辑文章
   */
-  public function edit($id){
+  public function edit(Request $request,$id){
     if(!Articles::find($id)){
       return view('admin.home')->withError('没有此文章');
     }
+    //$request->session()->forget('Ok'); //删除session
     $arts=Articles::join('users',function($users){
       $users->on('articles.user_id','=','users.id');
     })->select('articles.id as id','articles.article_title','articles.article_body','users.name','reads','comments')->find($id);

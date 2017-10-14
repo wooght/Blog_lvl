@@ -35,8 +35,9 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            //将计数中间件存放在webmiddle中，每次访问都会计数
+            \App\Http\Middleware\AdminNavMiddleware::class,
         ],
-
         'api' => [
             'throttle:60,1',
             'bindings',

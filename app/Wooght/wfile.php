@@ -35,7 +35,7 @@ class wfile
 	//当目录不存在时,是否创建目录
 	private $f_mk_dir=false;
 	//允许的最大size=512
-	private $f_mx_s=512;
+	private $f_mx_s=2048;
 	//允许的最大宽度
 	private $f_mx_w=800;
 	//允许的最大高度

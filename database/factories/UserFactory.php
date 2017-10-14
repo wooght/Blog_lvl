@@ -15,19 +15,34 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     static $password;
-
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => $password ?: $password = bcrypt('111111'),
         'remember_token' => str_random(10),
     ];
 });
 
-//后他用户数据模型工厂
-$factory->define(App\Admin_users::class, function (Faker $faker) {
-    static $password;
+$factory->define(App\Articles::class,function (Faker $faker){
+  return [
+    'article_title' => $faker->catchPhrase,
+    //固定text的最大长度
+    'article_contents' => $faker->text($catchPhrase=180),
+    'article_body' => $faker->randomHtml(),
+    'img' => function(){
+      $rand=rand(1,9);
+      $imgarr=array('1'=>'201710092230328068.jpg','2'=>'201710141113576105.jpg',
+      '3'=>'201710141113576104.jpg','4'=>'201710141210222912.jpg','5'=>'201710141210076862.jpg');
+      if($rand<6){
+        return $imgarr[$rand];
+      }
+    }
+  ];
+});
 
+//后他用户数据模型工厂
+$factory->define(App\Admin::class, function (Faker $faker) {
+    static $password;
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,

@@ -33,6 +33,10 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router){
   $router->post('logout', 'LoginController@logout');
   Route::get('home', 'HomeController@index');//后台首页-文章列表
   Route::get('page/{id}','HomeController@index');//
+  Route::get('user','UserController@index');
+  Route::get('user/page/{page}','UserController@index');
+  Route::get('articleslist/id/{id}','UserController@articleslist');
+  Route::get('articleslist/id/{id}/page/{page}','UserController@articleslist');
 
   /*管理内容*/
   Route::resource('article','HomeController');//文章资源管理

@@ -32,15 +32,14 @@
                     <td><span class="label label-success"><a style="color:#fff;" href='{{URL('admin/article/'.$one->id.'/edit')}}'>Edit</a></span></td>
                     <td><span class="label label-warning"><a style="color:#fff;" href="#" onclick="document.getElementById('del_fm{{$one->id}}').submit();">Dll</a></span></td>
                   </tr>
+                  <form action="{{URL('admin/article/'.$one->id)}}" id='del_fm{{$one->id}}' style="display:none;" method="post">
+                    <input name='_method' type="hidden" value='DELETE'><!--DELETE大写-->
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <!--不能input传递其他参数-->
+                  </form>
                   @endforeach
                 </table>
               </div>
               {!!$fy!!}
-
-      <form action="{{URL('admin/article/'.$one->id)}}" id='del_fm{{$one->id}}' style="display:none;" method="post">
-        <input name='_method' type="hidden" value='DELETE'><!--DELETE大写-->
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <!--不能input传递其他参数-->
-      </form>
 </section>
 @endsection
