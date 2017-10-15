@@ -17,19 +17,20 @@ class BlogHomeController extends Controller
   public function index($page=0){
     $at=new Articles;
     $atnum=Articles::all();
+
     //链表查询文章及所属个人信息
-    $at_list=$at->join('users',function($user){
-      $user->on('articles.user_id','=','users.id');
-    })->select('article_title','img','article_contents','article_body','articles.id as id','name','articles.created_at','reads','comments')->orderBy('id','desc')->skip($page*10-10)->take(10)->get();
+    // $at_list=$at->join('users',function($user){
+    //   $user->on('articles.user_id','=','users.id');
+    // })->select('article_title','img','article_contents','article_body','articles.id as id','name','articles.created_at','reads','comments')->orderBy('id','desc')->skip($page*10-10)->take(10)->get();
+
+    $at_list=$at->orderBy('id','desc')->skip($page*10-10)->take(10)->get();
     //翻页
     $fyobj=new wfanye($page,$atnum->count(),'',10,10);
     $fy=$fyobj->show();
     return view('welcome',compact('fy','atnum'))->withList($at_list);
   }
-  //测试后台
-  public function adm_index(){
-    return view('adminlte');
-  }
+
+
   //查看文章详细信息
   public function article_view($id){
     $at=Articles::find($id);
@@ -40,15 +41,23 @@ class BlogHomeController extends Controller
       $at->save();
     }
     //文章内容
+
     // $article=Articles::join('users',function($user){
     //   $user->on('articles.user_id','=','users.id');
     // })->select('article_title','article_body','articles.id as id','name','articles.created_at','reads','comments')->find($id);
+
     $article=Articles::find($id);
     $article->name=$article->user->name;//一对多逆向获取
     //评论内容
-    $comts_list=Comments::join('users',function($user){
-      $user->on('comments.user_id','=','users.id');
-    })->select('comments.comment_body','comments.id as cmtsid','users.name','comments.created_at')->where('comments.article_id','=',$id)->get();
+
+    // $comts_list=Comments::join('users',function($user){
+    //   $user->on('comments.user_id','=','users.id');
+    // })->select('comments.comment_body','comments.id as cmtsid','users.name','comments.created_at')->where('comments.article_id','=',$id)->get();
+
+    $comts_list=Comments::where('article_id','=',$id)->get();//默认已经查询用户信息
+    // foreach($comts_list as $comts){
+    //   echo $comts->user->name; //得到对应的用户信息的方式
+    // }
     return view('vipusers/article_view',compact('article','comts_list'));
   }
 

@@ -38,9 +38,15 @@ class HomeController extends Controller
     $at_num=Articles::all()->count();//总数
     $fy_boj=new wfanye($page,$at_num,'/admin',10,10);
     $fy=$fy_boj->show();
-    $list=$at->join('users',function($users){
-      $users->on('articles.user_id','=','users.id');
-    })->select('articles.id as id','articles.article_title','articles.created_at','users.name','reads','comments')->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
+
+    // $list=$at->join('users',function($users){
+    //   $users->on('articles.user_id','=','users.id');
+    // })->select('articles.id as id','articles.article_title','articles.created_at','users.name','reads','comments')->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
+
+    $list=$at->skip($page-1)->take(10)->orderby('id','desc')->get();
+    //@基于 \App\Articles:action User
+    //@视图通过 $listobj->user->name访问用户名
+    
     return view('admin/home',compact('fy'))->withList($list);
   }
   /*

@@ -26,8 +26,8 @@
                     <td>{{$one->id}}</td>
                     <td>{{$one->name}}</td>
                     <td>{{$one->email}}</td>
-                    <td><span class="badge bg-red">{{$one->articlenum}}</span></td>
-                    <td><span class="badge bg-blue">{{$one->commentnum}}</span></td>
+                    <td><span class="badge bg-red">{{$one->Articles()->count()}}</span></td>
+                    <td><span class="badge bg-blue">{{$one->Comments()->count()}}</span></td>
                     <td>{{$one->created_at}}</td>
                     <td><span class="label label-success"><a style="color:#fff;" href='{{URL('admin/articleslist/id/'.$one->id)}}'>查看文章</a></span></td>
                     <td><span class="label label-warning"><a style="color:#fff;" href="#" onclick="document.getElementById('del_fm{{$one->id}}').submit();">查看评论</a></span></td>

@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <td>
-              <div>发布:[{{$one->name}}] <span class="f_right">阅读:{{$one->reads}},评论:{{$one->comments}},{{$one->created_at}}</span></div>
+              <div>发布:[{{$one->user->name}}] <span class="f_right">阅读:{{$one->reads}},评论:{{$one->comments}},{{$one->created_at}}</span></div>
             </td>
           </tr>
         </table>

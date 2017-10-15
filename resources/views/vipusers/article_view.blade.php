@@ -30,7 +30,7 @@
   <!--评论内容-->
   <div class="comts_list">
     @foreach($comts_list as $comts)
-    <div class="comts_user"v>{{$comts->name}}</div>
+    <div class="comts_user"v>{{$comts->user->name}}</div>
     <div class="comts_body">{{$comts->comment_body}}</div>
     @endforeach
   </div>

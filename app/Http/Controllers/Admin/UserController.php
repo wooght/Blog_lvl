@@ -32,14 +32,16 @@ class UserController extends Controller
     $fy_boj=new wfanye($page,$user_num,'/admin/user',10,10);
     $fy=$fy_boj->show();
     $users=User::select('users.id','users.name','users.email','users.created_at')->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
+
     //统计计数，要么放在主表中，要么放在附表中  不能每次去count查询
-    foreach($users as $user){
-      $user->articlenum=$user->Articles()->count();
-      $user->commentnum=$user->Comments()->count();
-    }
+    // foreach($users as $user){
+    //   $user->articlenum=$user->Articles()->count();
+    //   $user->commentnum=$user->Comments()->count();  视图可以直接使用此方法
+    // }
+
     return view('admin/user',compact('fy'))->withUsers($users);
   }
-  
+
   public function articleslist($id,$page=1)
   {
     //文章列表
@@ -51,4 +53,17 @@ class UserController extends Controller
     $list=$at->Articles()->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
     return view('admin/home',compact('fy'))->withList($list);
   }
+
+  /*
+  Eloquent hasMany,belongsTo 关系及应用
+  主表中，定义的方法可以直接在查询中或查询结果中使用
+  如此控制器articleslist方法中$at->Articles()->skip....中的使用
+
+  随表（多表中），定义的方法只能当属性使用
+  如：
+  $ats=Articles::all();
+  foreach($ats as $at){
+    echo $at->user->name;//得到所属用户的用户名
+  }
+  */
 }

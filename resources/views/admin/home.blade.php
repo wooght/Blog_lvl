@@ -24,7 +24,7 @@
                   @foreach($list as $one)
                   <tr>
                     <td>{{$one->id}}</td>
-                    <td>{{$one->name}}</td>
+                    <td>{{$one->user->name}}</td>
                     <td>{{$one->article_title}}</td>
                     <td><span class="badge bg-red">{{$one->reads}}</span></td>
                     <td><span class="badge bg-blue">{{$one->comments}}</span></td>
