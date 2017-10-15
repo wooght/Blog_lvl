@@ -25,12 +25,8 @@ class UserController extends Controller
       $this->middleware('auth.admin:admin');
   }
 
-  /*
-  默认方法
-   */
   public function index($page=1)
   {
-
     //用户列表
     $user_num=User::all()->count();//总数
     $fy_boj=new wfanye($page,$user_num,'/admin/user',10,10);
@@ -43,6 +39,7 @@ class UserController extends Controller
     }
     return view('admin/user',compact('fy'))->withUsers($users);
   }
+  
   public function articleslist($id,$page=1)
   {
     //文章列表

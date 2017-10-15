@@ -12,6 +12,12 @@ class Articles extends Model
     public function Comments(){
       return $this->hasMany('App\Comments');
     }
+    //对用户一对多逆向
+    public function User(){
+      return $this->belongsTo('\App\User');
+    }
+
+    // factory add read,comments
     public function addreads($id){
       $art=self::find($id);
       $art->reads+=rand(0,10);

@@ -27,8 +27,8 @@ class AdminNavMiddleware
     }
     public function handle($request, Closure $next)
     {
-        //handle 默认运行apache
-        //var Closure $next  下一步
+        //@handle 默认运行
+        //@var Closure $next  下一步
         $use=new \App\User;
         $allnum=$use->returnAllNum();//获得计数数据
         $this->view->share('allnum',$allnum);

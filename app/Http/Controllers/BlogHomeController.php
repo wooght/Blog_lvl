@@ -40,9 +40,11 @@ class BlogHomeController extends Controller
       $at->save();
     }
     //文章内容
-    $article=Articles::join('users',function($user){
-      $user->on('articles.user_id','=','users.id');
-    })->select('article_title','article_body','articles.id as id','name','articles.created_at','reads','comments')->find($id);
+    // $article=Articles::join('users',function($user){
+    //   $user->on('articles.user_id','=','users.id');
+    // })->select('article_title','article_body','articles.id as id','name','articles.created_at','reads','comments')->find($id);
+    $article=Articles::find($id);
+    $article->name=$article->user->name;//一对多逆向获取
     //评论内容
     $comts_list=Comments::join('users',function($user){
       $user->on('comments.user_id','=','users.id');

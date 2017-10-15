@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //系统引导  本次运行系统 string类型长度为191
         Schema::defaultStringLength(191);
     }
 
