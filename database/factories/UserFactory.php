@@ -3,19 +3,24 @@
 use Faker\Generator as Faker;
 
 /*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+ *@description factory
+ *@date 2017-10-10
+ *@author wooght
+ */
 
 $factory->define(App\User::class, function (Faker $faker) {
     static $password;
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('111111'),
+        'remember_token' => str_random(10),
+    ];
+});
 
+// @description admin factory
+$factory->define(App\Admin_users::class, function (Faker $faker) {
+    static $password;
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
@@ -24,14 +29,17 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-//后他用户数据模型工厂
-$factory->define(App\Admin_users::class, function (Faker $faker) {
-    static $password;
-
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-    ];
+$factory->define(App\Articles::class,function (Faker $faker){
+  return [
+    //@Provider fzaninotto/Faker
+    'article_title' => $faker->text($maxNbChars=50).'-'.$faker->name,
+    'article_contents' =>$faker->text($maxNbChars = 200),
+    'img' => function(){
+      $a=rand(1,9);
+      $img=array('1'=>'201710091932414256.jpg','2'=>'201710092004028896.jpg','3'=>'201710111937464927.png','4'=>'201710111938155918.jpg');
+      if($a<5) return $img[$a];
+      else return '';
+    },
+    'article_body' =>$faker->randomHtml(2,3),
+  ];
 });
