@@ -1,4 +1,11 @@
 <?php
+// @description operation article
+//
+// @param Request $request
+// @throws Exception
+// @author Wooght
+// @Date 2017-10-10
+
 
 namespace App\Http\Controllers\vipusers;
 

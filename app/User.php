@@ -25,4 +25,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    // @description 一对多关系
+    //action model/articles
+    public function articles(){
+      return $this->hasMany('App\Articles');
+    }
+
+    public static function get_count(){
+      return self::all()->count();
+    }
 }

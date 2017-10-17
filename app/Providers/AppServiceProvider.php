@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+// @description 本地化服务
+// @description Factory bind zh_CN
+// @author wooght
+use Faker\Factory;
+use Faker\Generator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+      $this->app->bind(Generator::class, function () {
+        return Factory::create('zh_CN');
+      });
     }
 
     /**
