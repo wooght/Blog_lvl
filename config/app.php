@@ -185,7 +185,9 @@ return [
         /*
          *支持UEidtor by wooght
          */
-        Stevenyangecho\UEditor\UEditorServiceProvider::class
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
+        // 支持Entrust
+        Zizaco\Entrust\EntrustServiceProvider::class
 
     ],
 
@@ -240,6 +242,7 @@ return [
          *UEditor by wooght
          */
         'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class,
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class
     ],
 
 ];

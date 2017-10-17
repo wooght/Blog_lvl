@@ -42,9 +42,10 @@ class UserController extends Controller
     return view('admin/user',compact('fy'))->withUsers($users);
   }
 
+
+  //文章列表
   public function articleslist($id,$page=1)
   {
-    //文章列表
     $at=User::find($id);
     $at_num=$at->Articles()->count();//总数
     $fy_boj=new wfanye($page,$at_num,'/admin/articleslist/id/'.$id,10,10);
