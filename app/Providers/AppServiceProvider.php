@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      //引导供应商Factory 采用 zh_CN 的方式返回对象
       $this->app->bind(Generator::class, function () {
         return Factory::create('zh_CN');
       });

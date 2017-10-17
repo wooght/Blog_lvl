@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterArticlesTable extends Migration
+class AlterArticles1Table extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AlterArticlesTable extends Migration
     public function up()
     {
       Schema::table('articles', function (Blueprint $table) {
-        $table->string('img')->default('')->change();
+        $table->integer('reads');
+        $table->integer('comments');
       });
     }
 

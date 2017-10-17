@@ -11,6 +11,6 @@ class Admin_userTableSeeder extends Seeder
      */
     public function run()
     {
-      factory('App\Admin_users',3)->create(['password' => bcrypt('123456')]);
+      factory('App\Admin',3)->create(['password' => bcrypt('111111')]);
     }
 }

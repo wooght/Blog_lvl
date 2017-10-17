@@ -26,7 +26,7 @@ class CommentsSeed extends Seeder
           $cmtnum=rand(5,40);
           for($i=0;$i<$cmtnum;$i++){
             Comments::create([
-              'user_id' =>  rand(1,$usernum),
+              'user_id' =>  $user[rand(1,$usernum-1)]->id,
               'article_id' => $art->id,
               'comment_body' => $faker->text($maxNbChars = 200),
             ]);
