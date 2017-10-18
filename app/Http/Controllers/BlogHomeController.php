@@ -11,6 +11,8 @@ use App\User;
 
 use App\Wooght\wfanye;
 
+use Carbon\Carbon;
+
 class BlogHomeController extends Controller
 {
   //默认首页
@@ -47,6 +49,7 @@ class BlogHomeController extends Controller
     // })->select('article_title','article_body','articles.id as id','name','articles.created_at','reads','comments')->find($id);
 
     $article=Articles::find($id);
+    $article->now=Carbon::now();
     $article->name=$article->user->name;//一对多逆向获取
     //评论内容
 
@@ -54,7 +57,7 @@ class BlogHomeController extends Controller
     //   $user->on('comments.user_id','=','users.id');
     // })->select('comments.comment_body','comments.id as cmtsid','users.name','comments.created_at')->where('comments.article_id','=',$id)->get();
 
-    $comts_list=Comments::where('article_id','=',$id)->get();//默认已经查询用户信息
+    $comts_list=Comments::where('article_id','=',$id)->orderBy('id','desc')->get();//默认已经查询用户信息
     // foreach($comts_list as $comts){
     //   echo $comts->user->name; //得到对应的用户信息的方式
     // }

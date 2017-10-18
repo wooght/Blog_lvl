@@ -94,7 +94,7 @@ html, body {
 /*评论内容*/
 .comts_list{width:90%; background-color: #eee; margin: 10px auto; padding:10px;}
 .comts_list .comts_user{color:#339; margin: 10px 0px 2px 2px;}
-.comts_list .comts_body{border:1px solid #ccd; padding:10px;}
+.comts_list .comts_body{border:1px solid #ccd; padding:10px; background-color: #fff;}
 
 /*
 后台CSS

@@ -22,7 +22,7 @@
     @endif
     <form method="post" action="/vipusers/hf">
       <textarea name="body" class="comment"></textarea>
-      <input type="submit" class="f_right" value="发布评论" />
+      {{$article->now}}<input type="submit" class="f_right" value="发布评论" />
       <input type="hidden" value="{{$article->id}}" name="article_id" />
       {{ csrf_field() }}
     </form>
@@ -30,7 +30,17 @@
   <!--评论内容-->
   <div class="comts_list">
     @foreach($comts_list as $comts)
-    <div class="comts_user"v>{{$comts->user->name}}</div>
+      @guest
+      <div class="comts_user">
+      @else
+      @if(auth::user()->id == $comts->user->id)
+      <div class="comts_user"  style="text-align:right;">
+      @else
+      <div class="comts_user">
+      @endif
+      @endguest
+      {{$comts->user->name}}
+      </div>
     <div class="comts_body">{{$comts->comment_body}}</div>
     @endforeach
   </div>
