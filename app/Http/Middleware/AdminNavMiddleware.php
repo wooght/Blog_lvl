@@ -10,6 +10,7 @@ namespace App\Http\Middleware;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 use Closure;
+use App\Admin;
 
 class AdminNavMiddleware
 {
@@ -31,6 +32,8 @@ class AdminNavMiddleware
         //@var Closure $next  下一步
         $use=new \App\User;
         $allnum=$use->returnAllNum();//获得计数数据
+        $admins=Admin::find(Auth('admin')->user()->id);
+        $allnum['admins']=$admins;//获得登录用户对象
         $this->view->share('allnum',$allnum);
         return $next($request);
     }

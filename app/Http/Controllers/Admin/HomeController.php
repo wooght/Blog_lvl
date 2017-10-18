@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Input;
 use Redirect;
 use App\User;
 use App\Wooght\wfanye;
+use App\Admin;
+
 /*
 后台默认控制器
 文章操作相关功能
@@ -33,6 +35,19 @@ class HomeController extends Controller
    */
   public function index($page=1)
   {
+    //获取权限方法  已放在了view中
+    // $user=User::find(Auth('admin')->user()->id);
+    // if($user->hasRole('admins')){
+    //   echo 'OK1';
+    //   if($user->can('editor_articles')){
+    //     echo 'OK2';
+    //   }
+    // }else{
+    //   echo 'error'.Auth('admin')->user()->id;
+    // }
+    // dd('<br />end');
+
+
     //文章列表
     $at=new Articles;
     $at_num=Articles::all()->count();//总数
@@ -46,7 +61,7 @@ class HomeController extends Controller
     $list=$at->skip($page-1)->take(10)->orderby('id','desc')->get();
     //@基于 \App\Articles:action User
     //@视图通过 $listobj->user->name访问用户名
-    
+
     return view('admin/home',compact('fy'))->withList($list);
   }
   /*

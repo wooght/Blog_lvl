@@ -18,7 +18,7 @@ class Articles extends Model
     }
 
     // factory add read,comments
-    public function addreads($id){
+    public static function numadd($id){
       $art=self::find($id);
       $art->reads+=rand(0,10);
       $art->comments+=1;

@@ -75,8 +75,12 @@
       </li>
       <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
       <li class="header">LABELS</li>
-      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-
+      <!--Entrust权限控制应用-->
+      @if($allnum['admins']->can('editor_user'))
+      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>管理员</span></a></li>
+      @elseif($allnum['admins']->can('editor_articles'))
+      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>编辑员</span></a></li>
+      @endif
       <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
 
