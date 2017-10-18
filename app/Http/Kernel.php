@@ -35,10 +35,9 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            // share view navigation to route::web
-            \App\Http\Middleware\wNavigation::class,
+            //将计数中间件存放在webmiddle中，每次访问都会计数
+            \App\Http\Middleware\AdminNavMiddleware::class,
         ],
-
         'api' => [
             'throttle:60,1',
             'bindings',
@@ -60,7 +59,12 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        //注册中间件
+        //注册后台中间件
         'auth.admin' => \App\Http\Middleware\AdminAuthMiddleware::class,
+
+        // Entrust 中间件
+        'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
+        'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
+        'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
     ];
 }

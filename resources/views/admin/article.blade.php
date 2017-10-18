@@ -40,6 +40,7 @@
     </form>
   </div>
 </section>
+<script id="ueditor"></script>
 <script>
   var ue=UE.getEditor("ueditor",{
     //toolbars:[
@@ -51,7 +52,7 @@
   ue.ready(function(){
        //因为Laravel有防csrf防伪造攻击的处理所以加上此行
        ue.execCommand('serverparam','_token','{{ csrf_token() }}');
-       ue.setContent('{!!$arts->article_body!!}');
+       ue.setContent("{!!$arts->article_body!!}");
   });
 </script>
 @endsection

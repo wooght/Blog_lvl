@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comments extends Model
 {
-
-      public static function get_count(){
-        return self::all()->count();
-      }
+    //与用户多对一
+    public function User(){
+      return $this->belongsTo('App\User');
+    }
 }
