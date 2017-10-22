@@ -38,8 +38,21 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router){
   Route::get('articleslist/id/{id}','UserController@articleslist');
   Route::get('articleslist/id/{id}/page/{page}','UserController@articleslist');
 
+
   /*管理内容*/
   Route::resource('article','HomeController');//文章资源管理
+  Route::resource('admin','EditorAdminController');//管理员资源管理
+  Route::resource('comment','CommentController');//评论资源管理
+  Route::get('comment/page/{page}','CommentController@index');
+  Route::get('articleview/{id}','CommentController@articleview');
+  /*
+    资源管理包括:index,edit,update,story,destory
+    提交方式包括:/,/id/edit,PUT,/,DELETE,
+  */
   //$router->put('articleup','ArticlesController@articleup');
+
+  /*管理员管理*/
+  Route::get('adminlist','HomeController@adminlist');
+  Route::get('admineditor/id/{id}','HomeController@admineditor');
 });
 Auth::routes();

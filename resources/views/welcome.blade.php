@@ -35,7 +35,7 @@
   </div>
   @else
   <div class="article_list">
-    [{{$one->name}}]发布:<a href='{{URL('article/id/'.$one->id)}}'>{{$one->article_title}}</a> <span class="f_right">阅读:{{$one->reads}},评论:{{$one->comments}},{{$one->created_at}}</span>
+    [{{$one->user->name}}]发布:<a href='{{URL('article/id/'.$one->id)}}'>{{$one->article_title}}</a> <span class="f_right">阅读:{{$one->reads}},评论:{{$one->comments}},{{$one->created_at}}</span>
   </div>
   @endif
   @endforeach

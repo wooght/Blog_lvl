@@ -49,7 +49,7 @@ class BlogHomeController extends Controller
     // })->select('article_title','article_body','articles.id as id','name','articles.created_at','reads','comments')->find($id);
 
     $article=Articles::find($id);
-    $article->now=Carbon::now();
+    $article->now=Carbon::now();//Carbon获取当前时间
     $article->name=$article->user->name;//一对多逆向获取
     //评论内容
 

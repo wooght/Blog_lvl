@@ -11,7 +11,7 @@
       <div class="pull-left info">
         <p>{{ auth('admin')->user()->name }}</p>
         <!-- Status -->
-        <a href="#"><i class="fa fa-circle text-success"></i>在线</a>
+        <a href="#"><i class="fa fa-circle text-success"></i>{{$allnum['admins']->roles[0]['display_name']}}</a>
       </div>
     </div>
 
@@ -30,20 +30,6 @@
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">管理选项</li>
-      <!-- Optionally, you can add icons to the links -->
-      <li class="active"><a href="#"><i class="fa fa-link"></i> <span>主题列表</span></a></li>
-      <li><a href="#"><i class="fa fa-link"></i> <span>用户管理</span></a></li>
-      <li class="treeview">
-        <a href="#"><i class="fa fa-link"></i> <span>评论管理</span>
-          <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="#">Link in level 2</a></li>
-          <li><a href="#">Link in level 2</a></li>
-        </ul>
-      </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-files-o"></i>
@@ -52,35 +38,33 @@
             <span class="label label-primary pull-right">{{$allnum['users_num']}}</span>
           </span>
         </a>
+        @if($allnum['admins']->hasRole('admins'))
         <ul class="treeview-menu">
           <li><a href="{{URL('admin/user')}}"><i class="fa fa-circle-o">用户列表</i></a></li>
-          <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>管理员列表</a></li>
+          <!--拥有管理权限才显示管理员管理,Entrust权限应用-->
+          @if($allnum['admins']->can('editor_user'))
+          <li><a href="{{URL('admin/adminlist')}}"><i class="fa fa-circle-o">管理员列表</i></a></li>
+          @endif
         </ul>
+        @endif
       </li>
       <li>
         <a href="{{URL('admin')}}">
-          <i class="fa fa-calendar"></i> <span>主题管理</span>
+          <i class="fa fa-calendar"></i> <span>帖子管理</span>
           <span class="pull-right-container">
             <small class="label pull-right bg-red">{{$allnum['articles_num']}}</small>
           </span>
         </a>
       </li>
       <li>
-        <a href="pages/mailbox/mailbox.html">
+        <a href="{{URL('admin/comment')}}">
           <i class="fa fa-envelope"></i> <span>评论管理</span>
           <span class="pull-right-container">
             <small class="label pull-right bg-yellow">{{$allnum['comments_num']}}</small>
           </span>
         </a>
       </li>
-      <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-      <li class="header">LABELS</li>
-      <!--Entrust权限控制应用-->
-      @if($allnum['admins']->can('editor_user'))
-      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>管理员</span></a></li>
-      @elseif($allnum['admins']->can('editor_articles'))
-      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>编辑员</span></a></li>
-      @endif
+      <li class="header">数据统计</li>
       <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
 

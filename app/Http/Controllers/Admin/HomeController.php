@@ -15,6 +15,7 @@ use Redirect;
 use App\User;
 use App\Wooght\wfanye;
 use App\Admin;
+use App\Role;
 
 /*
 后台默认控制器
@@ -58,7 +59,7 @@ class HomeController extends Controller
     //   $users->on('articles.user_id','=','users.id');
     // })->select('articles.id as id','articles.article_title','articles.created_at','users.name','reads','comments')->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
 
-    $list=$at->skip($page-1)->take(10)->orderby('id','desc')->get();
+    $list=$at->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
     //@基于 \App\Articles:action User
     //@视图通过 $listobj->user->name访问用户名
 
@@ -108,6 +109,29 @@ class HomeController extends Controller
       $users->on('articles.user_id','=','users.id');
     })->select('articles.id as id','articles.article_title','articles.article_body','users.name','reads','comments')->find($id);
     return view('admin.article')->withArts($arts);
+  }
+  /*
+  管理员列表
+  */
+  public function adminlist(){
+    $admin=Admin::all();
+    // $haha=[];
+    // $arr=[];
+    // foreach($admin as $one){
+    //   $haha[$one->id]=json_decode($one->roles,true);
+    // }
+    // print_r($haha);
+    // print_r($haha[3][0]);
+    // $arr=$haha[3][0];
+    // echo $arr['display_name'];
+    // exit;
+    return view('admin.adminlist',compact('admin'));
+  }
+  /*编辑管理员*/
+  public function admineditor($id){
+    $admin=Admin::find($id);
+    $role=Role::all();
+    return view('admin.admineditor',compact('role','admin'));
   }
   public function haha(){
     dd('后台首页，当前用户名：'.auth('admin')->user()->name);

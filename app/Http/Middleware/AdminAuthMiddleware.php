@@ -16,6 +16,7 @@ class AdminAuthMiddleware
      */
     public function handle($request, Closure $next, $guard=null)
     {
+      //如果没有登录 设置登录跳转地址
       if (Auth::guard($guard)->guest()) {
           if ($request->ajax() || $request->wantsJson()) {
               return response('Unauthorized.', 401);

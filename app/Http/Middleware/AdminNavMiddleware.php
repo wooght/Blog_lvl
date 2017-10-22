@@ -28,13 +28,15 @@ class AdminNavMiddleware
     }
     public function handle($request, Closure $next)
     {
-        //@handle 默认运行
-        //@var Closure $next  下一步
+      //@handle 默认运行
+      //@var Closure $next  下一步
+      if(Auth('admin')->user()){
         $use=new \App\User;
         $allnum=$use->returnAllNum();//获得计数数据
         $admins=Admin::find(Auth('admin')->user()->id);
         $allnum['admins']=$admins;//获得登录用户对象
         $this->view->share('allnum',$allnum);
-        return $next($request);
+      }
+      return $next($request);
     }
 }

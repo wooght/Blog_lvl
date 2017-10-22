@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{config('app.name','博客首页')}}</title>
+        <title>{{config('app.name','Blog-wooght')}}</title>
 
         <!-- Fonts -->
         <link href="{{asset('css/blog_lvl.css')}}" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
     </head>
     <body>
       <div name='top' class='top'>
-        <span class="index"><a href='/'>{{Config('app.name','博客首页')}}</a></span>
+        <span class="index"><a href='/'>Blog-wooght</a></span>
         <!--判断是否是游客-->
         @guest
         <span class="f_right"><a href='{{ route('register') }}'>注册</a></span>

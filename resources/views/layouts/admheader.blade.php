@@ -5,7 +5,7 @@
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini">后台</span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg">{{ config('app.name', 'Laravel') }}-admin</span>
+    <span class="logo-lg">{{ config('app.name', 'BlogWooght') }}-admin</span>
   </a>
 
   <!-- Header Navbar -->
