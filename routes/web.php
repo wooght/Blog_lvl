@@ -28,6 +28,7 @@ Route::group(['prefix'=>'vipusers','namespace'=>'vipusers','middleware'=>'auth']
 Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router){
   /*认证模块*/
   $router->get('/','HomeController@index');
+  $router->get('serach','HomeController@index');
   $router->get('login', 'LoginController@showLoginForm');
   $router->post('login', 'LoginController@login');
   $router->post('logout', 'LoginController@logout');

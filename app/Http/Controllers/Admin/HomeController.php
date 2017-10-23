@@ -16,6 +16,7 @@ use App\User;
 use App\Wooght\wfanye;
 use App\Admin;
 use App\Role;
+use Cookie;
 
 /*
 后台默认控制器
@@ -34,7 +35,7 @@ class HomeController extends Controller
   /*
   默认方法
    */
-  public function index($page=1)
+  public function index(Request $request,$page=1)
   {
     //获取权限方法  已放在了view中
     // $user=User::find(Auth('admin')->user()->id);
@@ -48,10 +49,27 @@ class HomeController extends Controller
     // }
     // dd('<br />end');
 
-
     //文章列表
     $at=new Articles;
-    $at_num=Articles::all()->count();//总数
+    $ck=Input::get('title')?Input::get('title'):$request->cookie('article_title');
+    $delck=Cookie::queue('article_title','',-100);
+    if($request->path()=='admin'){
+      $ck=false;
+      //$delck=Cookie::forget('article_title'); 这里设置失败 ?
+    }
+    //dd($request->method());
+    if($ck){
+      //request->cookie() 获取cookie
+      //request->method() 获取请求方法 get/post
+      //request->paht() 获取请求路径 admin
+      //request->url() 获取请求全路径域名
+      $at_num=Articles::where('article_title','like','%'.$ck.'%');
+      $at=$at->where('article_title','like','%'.$ck.'%');
+      $delck=Cookie::queue('article_title',$ck);//设置cookie
+    }else{
+      $at_num=Articles::all();
+    }
+    $at_num=$at_num->count();//总数
     $fy_boj=new wfanye($page,$at_num,'/admin',10,10);
     $fy=$fy_boj->show();
 
@@ -62,8 +80,7 @@ class HomeController extends Controller
     $list=$at->skip(($page-1)*10)->take(10)->orderby('id','desc')->get();
     //@基于 \App\Articles:action User
     //@视图通过 $listobj->user->name访问用户名
-
-    return view('admin/home',compact('fy'))->withList($list);
+    return view('admin/home',compact('fy'))->withList($list)->withCookie($delck);
   }
   /*
   删除文章
